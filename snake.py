@@ -14,8 +14,8 @@ stamp_list = []
 food_pos = []
 food_stamps = []
 snake = turtle.clone()
-turtle.register_shape("my_gif.gif")
-snake.shape("my_gif.gif")
+
+snake.shape("circle")
 snake.color("blue")
 turtle.hideturtle()
 for i in range(START_LENGTH):
