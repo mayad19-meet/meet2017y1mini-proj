@@ -2,12 +2,12 @@ import turtle
 import random
 turtle.tracer(1,0)
 SIZE_X=800
-SIZE_Y=500
+SIZE_Y=600
 turtle.setup(SIZE_X, SIZE_Y) 
 
 turtle.penup()
 SQUARE_SIZE = 20
-START_LENGTH = 6
+START_LENGTH = 7
 
 pos_list = []
 stamp_list = []
@@ -102,12 +102,6 @@ def move_snake():
     else:
         snake.goto(x_pos,SQUARE_SIZE+y_pos)
         print("you moved up")
-    my_pos=snake.pos()
-    pos_list.append(my_pos)
-    new_stamp=snake.stamp()
-    stamp_list.append(new_stamp)
-    old_stamp=stamp_list.pop(0)
-    snake.clearstamp(old_stamp)
     global food_stamps,food_pos
     if snake.pos() in food_pos:
         food_ind=food_pos.index(snake.pos())
@@ -116,7 +110,24 @@ def move_snake():
         food_stamps.pop(food_ind)
         print("you have eaten the food")
         make_food()
-    pos_list.pop(0)
+    
+    else:
+        old_stamp=stamp_list.pop(0)
+        snake.clearstamp(old_stamp)
+        pos_list.pop(0)
+    
+    my_pos=snake.pos()
+    pos_list.append(my_pos)
+    new_stamp=snake.stamp()
+    stamp_list.append(new_stamp)
+
+    
+        
+
+   
+    
+      
+        
 
     new_pos=snake.pos()
     new_x_pos=new_pos[0]
@@ -136,6 +147,9 @@ def move_snake():
         print("YOU HIT THE DOWN WALL!! GAME OVER!!")
         quit()
 
+    if snake.pos()in pos_list[:-1]:
+        print("game over")
+        quit() 
     turtle.ontimer(move_snake,TIME_STEP)
 
 make_food()
@@ -144,11 +158,11 @@ move_snake()
 ##food_pos=[(100,100),(-100,100),(-100,-100),(100,-100)]
 ##food_stamps=[]
 ##for this_food_pos in food_pos:
-##    food.goto(this_food_pos)    
-##    new_stamp = food.stamp()
+##    food.goto(this_food_pos)    ##    new_stamp = food.stamp()
 ##    food_stamps.append(new_stamp)
 
- 
+
+    
 
     
     
