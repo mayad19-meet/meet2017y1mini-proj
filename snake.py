@@ -14,7 +14,9 @@ stamp_list = []
 food_pos = []
 food_stamps = []
 snake = turtle.clone()
-snake.shape("square")
+turtle.register_shape("my_gif.gif")
+snake.shape("my_gif.gif")
+snake.color("blue")
 turtle.hideturtle()
 for i in range(START_LENGTH):
     x_pos=snake.pos()[0]
@@ -70,16 +72,21 @@ def right():
 def make_food():
     min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
     max_x=int(SIZE_X/2/SQUARE_SIZE)-1
-    min_y=-int(SIZE_Y/2/SQUARE_SIZE)-1
-    max_y=int(SIZE_Y/2/SQUARE_SIZE)+1
+    min_y=-int(SIZE_Y/2/SQUARE_SIZE)+1
+    max_y=int(SIZE_Y/2/SQUARE_SIZE)-1
+    
     food_x = random.randint(min_x,max_x)*SQUARE_SIZE
     food_y = random.randint(min_y,max_y)*SQUARE_SIZE
-    random_pos=(food_x,food_y)
+    random_pos = (food_x, food_y)
+
+    if random_pos in pos_list:
+        make_food()
+        
     food.goto(random_pos)
     food_pos.append(random_pos)
     stamp_id=food.stamp()
     food_stamps.append(stamp_id)
-
+    
 turtle.onkeypress(up,UP_ARROW)
 turtle.onkeypress(down,DOWN_ARROW)
 turtle.onkeypress(left,LEFT_ARROW)
